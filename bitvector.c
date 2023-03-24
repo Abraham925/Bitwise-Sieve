@@ -5,25 +5,42 @@
 struct bit_vector *
 bv_create(int size)
 {
-	return NULL;
+	int bytes = (size + 7)/8;
+	struct bit_vector *bv = malloc(sizeof(struct bit_vector));
+	unsigned char *vectorArray = calloc(bytes, sizeof(unsigned char));
+	bv->vector = vectorArray;
+
+
+	
+	return bv;
 }
 
 void
 bv_destroy(struct bit_vector *v)
 {
-
+	free(v->vector);
+	free(v);
+	
+	
 }
 
 int
 bv_contains(struct bit_vector *v, int i)
 {
-	return -1;
+	// i is the the bit
+	// i/8 is the byte
+	// (byte)v->vector[i/8];
+	// mask = 1<<i;
+	// v->vector[i/8]&mask 
+	// ~(mask) == ~(1<<i) remove 
+	// or is used in insert
+	
 }
 
 void
 bv_insert(struct bit_vector *v, int i)
 {
-
+	
 }
 
 void
