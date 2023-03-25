@@ -81,7 +81,7 @@ main(void)
 	printVec(vec2);
 
 
-	/* delete this line to test part 4-B
+
 
 	bv_remove(vec2, 5);
 	bv_remove(vec2, 8);
@@ -99,7 +99,7 @@ main(void)
 	printVec(vec3);
 
 
-	/* delete this line to test part 4-C
+
 
 	printf("4Ci vec = ");
 	printVec(vec);
@@ -113,7 +113,7 @@ main(void)
 	printVec(vec4);
 
 
-	/* delete this line to test part 4-D
+	
 
 	printf("4Di vec = ");
 	printVec(vec);
@@ -132,7 +132,7 @@ main(void)
 	bv_destroy(vec2);
 
 
-	*//* delete this line also when testing 4-D */
+	
 	bv_destroy(vec);
 
 	return 0;

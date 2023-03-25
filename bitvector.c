@@ -5,8 +5,11 @@
 int
 numBytes(int size)
 {	
-	int bytes = (size + 7)/8;
-	return bytes;
+
+	if(size%8 > 0 ){
+		return (size/8) + 1;
+	}
+	return size/8;
 
 }
 
@@ -89,18 +92,38 @@ bv_complement(struct bit_vector *v)
 struct bit_vector *
 bv_union(struct bit_vector *v1, struct bit_vector *v2)
 {
-	return NULL;
+
+	int bytes = numBytes(v1->size);
+	struct bit_vector *x = bv_create(v1->size);
+	for(int i= 0; i<bytes; i++){
+		x->vector[i] = v1->vector[i]|v2->vector[i];
+	}
+	
+	return x;
+	
 }
 
 struct bit_vector *
 bv_intersection(struct bit_vector *v1, struct bit_vector *v2)
 {
-	return NULL;
+	int bytes = numBytes(v1->size);
+	struct bit_vector *x = bv_create(v1->size);
+	for(int i= 0; i<bytes; i++){
+		x->vector[i] = v1->vector[i]&v2->vector[i];
+	}
+	
+	return x;
 }
 
 struct bit_vector *
 bv_difference(struct bit_vector *v1, struct bit_vector *v2)
 {
-	return NULL;
+	int bytes = numBytes(v1->size);
+	struct bit_vector *x = bv_create(v1->size);
+	for(int i= 0; i<bytes; i++){
+		x->vector[i] = v1->vector[i]&~(v2->vector[i]);
+	}
+
+	return x;
 }
 
