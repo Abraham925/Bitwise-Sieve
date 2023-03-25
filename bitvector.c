@@ -2,6 +2,18 @@
 #include <stdio.h>
 
 #include "bitvector.h"
+/*
+ *makes functions to operate within a vector using bitwise operators
+ *
+ *
+ *author: Abraham Austin
+ *
+ */
+/*
+ *helper function to get the number of bytes in using the given number of bits
+ *@param: number of bits
+ *@return: returns the number of bytes
+ */
 int
 numBytes(int size)
 {	
@@ -12,7 +24,13 @@ numBytes(int size)
 	return size/8;
 
 }
-
+/*
+ *function to make a bit_vector struct
+ *initializes the size and the array
+ *@param: takes the number of bits
+ *@return: returns the bit_vector struct
+ *
+ */
 struct bit_vector *
 bv_create(int size)
 {
@@ -26,7 +44,11 @@ bv_create(int size)
 	
 	return bv;
 }
-
+/*
+ *Removes the data allocated for the vector and the bit_vector
+ *@param bit_vector
+ *
+ */
 void
 bv_destroy(struct bit_vector *v)
 {
@@ -35,7 +57,12 @@ bv_destroy(struct bit_vector *v)
 	
 	
 }
-
+/*
+ *Checks if the vector contains a bit
+ *@param: takes a bit_vector and the bit
+ *@return: returns true or false
+ *
+ */
 int
 bv_contains(struct bit_vector *v, int i)
 {
@@ -51,7 +78,11 @@ bv_contains(struct bit_vector *v, int i)
 	if((byte&mask) > 0){return 1;}
 	else{return 0;}
 }
-
+/*
+ *Inserts a new bit in place of another
+ *@param bit_vector and the bit
+ *
+ */
 void
 bv_insert(struct bit_vector *v, int i)
 {
@@ -64,7 +95,11 @@ bv_insert(struct bit_vector *v, int i)
 
 	
 }
-
+/*
+ *Removes the a bit from the vector
+ *@param bit_vector and the bit
+ *
+ */
 void
 bv_remove(struct bit_vector *v, int i)
 {
@@ -74,7 +109,12 @@ bv_remove(struct bit_vector *v, int i)
 	unsigned char mask = ~(1<<(i%8));
 	v->vector[i/8] = byte&mask;
 }
-
+/*
+ *Makes new bit_vector and makes a vector that is the opposite of the original
+ *@param: takes 2 bit_vectors
+ *@return: returns the bit_vector
+ *
+ */
 struct bit_vector *
 bv_complement(struct bit_vector *v)
 {
@@ -88,7 +128,12 @@ bv_complement(struct bit_vector *v)
 	
 	
 }
-
+/*
+ *Makes new bit_vector and makes a vector a combination of the two given vectors
+ *@param: takes 2 bit_vectors
+ *@return: returns the bit_vector
+ *
+ */
 struct bit_vector *
 bv_union(struct bit_vector *v1, struct bit_vector *v2)
 {
@@ -102,7 +147,12 @@ bv_union(struct bit_vector *v1, struct bit_vector *v2)
 	return x;
 	
 }
-
+/*
+ *Makes new bit_vector and makes a vector that is overlapping values of the two vectors
+ *@param: takes two bit_vectors
+ *@return: returns the bit_vector
+ *
+ */
 struct bit_vector *
 bv_intersection(struct bit_vector *v1, struct bit_vector *v2)
 {
@@ -114,7 +164,13 @@ bv_intersection(struct bit_vector *v1, struct bit_vector *v2)
 	
 	return x;
 }
-
+/*
+ *Makes new bit_vector and makes a vector that has the values 
+ *of the first vector that don't overlap with the values of the second
+ *@param: takes two bit_vectors
+ *@return: returns the bit_vector
+ *
+ */
 struct bit_vector *
 bv_difference(struct bit_vector *v1, struct bit_vector *v2)
 {

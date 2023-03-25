@@ -1,11 +1,17 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "bitvector.h"
-
+/*
+ *author: Abraham Austin
+ *uses the functions created in bitvector.c to filter through all the prime
+ *numbers till a given number
+*/
 int
 main(void)
 {
 	int n, i, j;
+	int isFirst = 1;
 	struct bit_vector *vec;
 
 	printf("Enter max int-> ");
@@ -13,22 +19,32 @@ main(void)
 
 	vec = bv_create(n + 1);
 
-	for(i = 0; i<n; i++){
+	//inserts into the vector
+	for(i = 2; i<=n; i++){
 		bv_insert(vec, i);
 
 	}	
 
-	for(j = 0; j<n; j++){
-		for(i = 0; i<n; i+j){
-			if (vec->vector[i]%j == 0){
+	//filters through the array by removing the multiples
+	for(j = 2; j<n; j++){
+		for(i = j+1; i<=n; i++){
+			if (i%j == 0){
 				bv_remove(vec, i);
 			}
 	
 		}
 	}
-	printf("Vec = ");
-	printVec(vec);
-
+	//prints the vector after filtering it
+	printf("Vec = {");
+	for(i = 2; i<=n; i++){
+		if (bv_contains(vec, i)) {
+			if (!isFirst)
+				printf(", ");
+			printf("%d", i);
+			isFirst = 0;
+		}
+	}
+	printf("}\n");	
 	bv_destroy(vec);
 	
 
