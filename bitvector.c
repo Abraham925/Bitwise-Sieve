@@ -66,11 +66,6 @@ bv_destroy(struct bit_vector *v)
 int
 bv_contains(struct bit_vector *v, int i)
 {
-	// i is the the bit
-	// i/8 is the byte
-	// (byte)v->vector[i/8];
-	// mask = 1<<i;
-	// v->vector[i/8]&mask 
 	
 	int byte = v->vector[i/8];
 	unsigned char mask = 1<<(i%8);
@@ -86,7 +81,7 @@ bv_contains(struct bit_vector *v, int i)
 void
 bv_insert(struct bit_vector *v, int i)
 {
-	// or is used in insert
+
 	int byte = v->vector[i/8];
 	unsigned char mask = 1<<(i%8);
 	v->vector[i/8] = byte|mask;
@@ -103,8 +98,7 @@ bv_insert(struct bit_vector *v, int i)
 void
 bv_remove(struct bit_vector *v, int i)
 {
-	// ~(mask) == ~(1<<i) remove 
-	// use &
+
 	int byte = v->vector[i/8];
 	unsigned char mask = ~(1<<(i%8));
 	v->vector[i/8] = byte&mask;
